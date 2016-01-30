@@ -6,7 +6,7 @@ module.exports = {
   entry: './src/index.js',
 
   output: {
-    filename: 'dist/bundle.js',
+    filename: 'public/bundle.js',
     //this is the default name, so you can skip it
     //at this directory our bundle file will be available
   },

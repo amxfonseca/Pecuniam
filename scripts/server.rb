@@ -5,11 +5,11 @@ Bundler.require
 DB = Sequel.sqlite("#{Dir.pwd}/pecuniam.db")
 
 get '/' do
-  send_file 'src/index.html'
+  send_file 'public/index.html'
 end
 
 get '/bundle.js' do
-  send_file 'dist/bundle.js'
+  send_file 'public/bundle.js'
 end
 
 get '/all' do
