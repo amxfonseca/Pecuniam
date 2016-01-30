@@ -1,2 +1,10 @@
-const log = (str) => console.log(str)
-log('hello world')
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+
+ReactDOM.render(
+  <div>
+    Hello world
+  </div>,
+  document.getElementById('app')
+);

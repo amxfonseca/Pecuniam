@@ -11,8 +11,6 @@ if Dir.glob("#{Dir.pwd}/csv/*.csv").empty?
 end
 
 Dir.glob("#{Dir.pwd}/csv/*.csv") do |file|
-  next if file == '.' or file == '..'
-
   puts "Importing #{file}..."
 
   transactions_csv = CSV.read(file)
