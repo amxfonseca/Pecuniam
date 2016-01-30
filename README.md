@@ -2,6 +2,7 @@
 
 *NOTE: For now it only works with ING `csv` files.*
 Drop the `csv` files into the `/csv` folder then:
+
 `$ npm install`
 `$ npm start`
 
