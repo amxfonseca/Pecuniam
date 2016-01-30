@@ -23,7 +23,7 @@ Dir.glob("#{Dir.pwd}/csv/*.csv") do |file|
       name: row[1],
       account: row[2],
       contra_account: row[3],
-      action: row[5],
+      outgoing: row[5].include?('Af'),
       amount: row[6].sub(',', '.').to_f,
       description: row[8]
     })

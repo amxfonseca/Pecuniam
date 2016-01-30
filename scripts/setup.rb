@@ -8,7 +8,7 @@ DB.create_table? :transactions do
   String :name
   String :account
   String :contra_account
-  String :action
+  boolean :outgoing
   Float :amount
   String :description
 end

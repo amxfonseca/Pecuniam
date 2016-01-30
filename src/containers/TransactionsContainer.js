@@ -1,16 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux';
 
-function renderTransactions(transactions) {
-  return transactions.map(transaction => (
-    <div>{transaction.name}</div>
-  ))
-}
+import {
+  getAllOutgoing,
+  getAllIncoming,
+  sumAmount,
+  getMonth
+} from '../helpers/transaction-helper'
 
 function TransactionsContainer(props) {
+  const current = getMonth(props.transactions, 2015, 12)
+  const spent = sumAmount(getAllOutgoing(current))
+  const earned = sumAmount(getAllIncoming(current))
+
   return (
     <main>
-      {renderTransactions(props.transactions)}
+      <h1> {spent} vs {earned} </h1>
     </main>
   )
 }
