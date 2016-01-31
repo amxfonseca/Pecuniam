@@ -1,11 +1,11 @@
 import React from 'react'
 
-import TransactionsContainer from './TransactionsContainer'
+import OverviewContainer from './OverviewContainer'
 
 function App(props) {
   return (
     <main>
-      <TransactionsContainer />
+      <OverviewContainer />
     </main>
   )
 }

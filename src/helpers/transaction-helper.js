@@ -18,12 +18,23 @@ export function sumAmount(transactions) {
 
 export function getYear(transactions, year) {
   return transactions.filter(transaction => {
-    return moment(transaction.date).isSame(`${year}-01-01`, 'year')
+    return moment(transaction.date * 1000)
+      .isSame(`${year}-01-01`, 'year')
   })
 }
 
-export function getMonth(transactions, year, month) {
+export function getMonth(transactions, month) {
   return transactions.filter(transaction => {
-    return moment(transaction.date).isSame(`${year}-${month}-01`, 'month')
+    const year = moment(transaction.date * 1000).get('year')
+    const monthFormatted = month.toString().length === 1 ? `0${month}` : month
+
+    return moment(transaction.date * 1000)
+      .isSame(`${year}-${monthFormatted}-01`, 'month')
+  })
+}
+
+export function getWeek(transactions, week) {
+  return transactions.filter(transaction => {
+    return moment(transaction.date * 1000).isoWeek() === week
   })
 }

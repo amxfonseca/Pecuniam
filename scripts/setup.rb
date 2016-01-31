@@ -4,7 +4,7 @@ DB = Sequel.sqlite("#{Dir.pwd}/pecuniam.db")
 
 puts "Setting up database"
 DB.create_table? :transactions do
-  DateTime :date
+  Integer :date
   String :name
   String :account
   String :contra_account

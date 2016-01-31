@@ -19,7 +19,7 @@ Dir.glob("#{Dir.pwd}/csv/*.csv") do |file|
 
   transactions_csv.each do |row|
     DB[:transactions].insert({
-      date: DateTime.iso8601(row[0]),
+      date: DateTime.iso8601(row[0]).to_time.to_i,
       name: row[1],
       account: row[2],
       contra_account: row[3],
