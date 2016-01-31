@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
 
 import LineChart from '../components/LineChart'
 
@@ -10,24 +11,32 @@ import {
   getAllIncoming,
   sumAmount,
   getMonth,
-  getYear
+  getYear,
+  getDay
 } from '../helpers/transaction-helper'
 
 function OverviewContainer({ transactions }) {
-  const yearTransactions = getYear(transactions, 2015)
+  const year = 2015
+  const month = 7
 
-  const incoming = getAllIncoming(yearTransactions)
-  const outgoing = getAllOutgoing(yearTransactions)
+  const monthTransactions = getMonth(getYear(transactions, year), month)
 
-  const dataIncoming = months.map((month, index) => {
-    const monthIndex = index + 1
-    return sumAmount(getMonth(incoming, monthIndex))
-  });
+  const daysInMonth = moment(`${year}-${month}`, 'YYYY-MM').daysInMonth();
+  const days = []
 
-  const dataOutgoing = months.map((month, index) => {
-    const monthIndex = index + 1
-    return sumAmount(getMonth(outgoing, monthIndex))
-  });
+  const incoming = getAllIncoming(monthTransactions)
+  const outgoing = getAllOutgoing(monthTransactions)
+
+  const dataIncoming = []
+  const dataOutgoing = []
+
+  for (let i = 0; i < daysInMonth; i++) {
+    const day = i + 1
+    dataIncoming.push(sumAmount(getDay(incoming, day)))
+    dataOutgoing.push(sumAmount(getDay(outgoing, day)))
+
+    days.push(day)
+  }
 
   const datasets = [
     { data: dataOutgoing },
@@ -36,7 +45,7 @@ function OverviewContainer({ transactions }) {
 
   return (
     <div>
-      <LineChart datasets={datasets} labels={months} />
+      <LineChart datasets={datasets} labels={days} />
     </div>
   )
 }
