@@ -2,8 +2,8 @@ export const lineChartOptions = {
   scaleShowGridLines: true,
   scaleGridLineColor: 'rgba(0,0,0,.05)',
   scaleGridLineWidth: 1,
-  scaleShowHorizontalLines: true,
-  scaleShowVerticalLines: true,
+  scaleShowHorizontalLines: false,
+  scaleShowVerticalLines: false,
   bezierCurve: true,
   bezierCurveTension: 0.4,
   pointDot: true,
@@ -26,21 +26,24 @@ export const lineChartOptions = {
     </ul>`
 }
 
-export const defaultColorPalette = [
-  {
-    fillColor: 'rgba(220,220,220,0.2)',
-    strokeColor: 'rgba(220,220,220,1)',
-    pointColor: 'rgba(220,220,220,1)',
-    pointStrokeColor: '#fff',
-    pointHighlightFill: '#fff',
-    pointHighlightStroke: 'rgba(151,187,205,1)'
-  },
-  {
-    fillColor: 'rgba(151,187,205,0.2)',
-    strokeColor: 'rgba(151,187,205,1)',
-    pointColor: 'rgba(151,187,205,1)',
-    pointStrokeColor: '#fff',
-    pointHighlightFill: '#fff',
-    pointHighlightStroke: 'rgba(151,187,205,1)'
-  }
+const colors = [
+  '197, 75, 163',
+  '20, 190, 176',
+  '142, 227, 87',
+  '171, 159, 157',
+  '56, 63, 81',
+  '235, 89, 126',
+  '205, 243, 93',
+  '60, 79, 118'
 ]
+
+export const defaultColorPalette = colors.map(color => {
+  return {
+    fillColor: `rgba(${color}, 0.2)`,
+    strokeColor: `rgba(${color}, 1)`,
+    pointColor: `rgba(${color}, 1)`,
+    pointStrokeColor: '#333',
+    pointHighlightFill: '#333',
+    pointHighlightStroke: `rgba(${color}, 1)`
+  }
+})
