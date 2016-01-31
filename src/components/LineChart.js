@@ -22,9 +22,8 @@ function TimelineGraph({ datasets, labels }) {
     <Line
       data={data}
       options={lineChartOptions}
-      width="920"
-      height="500"
-      redraw
+      width="740"
+      height="320"
     />
   )
 }

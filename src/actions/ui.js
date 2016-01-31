@@ -6,3 +6,13 @@ export function initialiseApp() {
     dispatch(getTransactions())
   }
 }
+
+export function setDate(year, month) {
+  return dispatch => {
+    dispatch({
+      type: Symbol.for('set-date'),
+      year,
+      month
+    })
+  }
+}
