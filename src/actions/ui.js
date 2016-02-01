@@ -7,12 +7,11 @@ export function initialiseApp() {
   }
 }
 
-export function setDate(year, month) {
+export function setDate(date) {
   return dispatch => {
     dispatch({
       type: Symbol.for('set-date'),
-      year,
-      month
+      date
     })
   }
 }

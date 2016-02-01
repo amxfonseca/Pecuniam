@@ -1,36 +1,30 @@
 import React from 'react'
 import { months } from '../constants/date-constants'
 
-function prevMonth(year, month, setDate) {
-  const newMonth = month - 1
-  setDate(year, newMonth)
+function prevMonth(date, setDate) {
+  setDate(date.clone().add(-1, 'month'))
 }
 
-function nextMonth(year, month, setDate) {
-  const newMonth = month + 1
-  setDate(year, newMonth)
+function nextMonth(date, setDate) {
+  setDate(date.clone().add(1, 'month'))
 }
 
-function prevYear(year, month, setDate) {
-  const newYear = year - 1
-  setDate(newYear, month)
+function prevYear(date, setDate) {
+  setDate(date.clone().add(-1, 'year'))
 }
 
-function nextYear(year, month, setDate) {
-  const newYear = year + 1
-  setDate(newYear, month)
+function nextYear(date, setDate) {
+  setDate(date.clone().add(1, 'year'))
 }
 
-function DateControl({ year, month, setDate }) {
-  const now = `${months[month - 1]} ${year}`
-
+function DateControl({ date, setDate }) {
   return (
     <div>
-      <strong>{now}</strong>
-      <button onClick={() => prevMonth(year, month, setDate)}>prev month</button>
-      <button onClick={() => nextMonth(year, month, setDate)}>next month</button>
-      <button onClick={() => prevYear(year, month, setDate)}>prev year</button>
-      <button onClick={() => nextYear(year, month, setDate)}>next year</button>
+      <strong>{date.format('YYYY MM DD dddd')}</strong> <br />
+      <button onClick={() => prevMonth(date, setDate)}>prev month</button>
+      <button onClick={() => nextMonth(date, setDate)}>next month</button>
+      <button onClick={() => prevYear(date, setDate)}>prev year</button>
+      <button onClick={() => nextYear(date, setDate)}>next year</button>
     </div>
   )
 }

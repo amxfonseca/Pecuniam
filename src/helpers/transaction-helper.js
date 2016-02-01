@@ -16,35 +16,26 @@ export function sumAmount(transactions) {
   return cents / 100
 }
 
-export function getYear(transactions, year) {
+export function getYear(transactions, date) {
   return transactions.filter(transaction => {
-    return moment(transaction.date * 1000)
-      .isSame(`${year}-01-01`, 'year')
+    return date.isSame(transaction.date * 1000, 'year')
   })
 }
 
-export function getMonth(transactions, month) {
+export function getMonth(transactions, date) {
   return transactions.filter(transaction => {
-    const year = moment(transaction.date * 1000).format('YYYY')
-    const monthFormatted = month.toString().length === 1 ? `0${month}` : month
-
-    return moment(transaction.date * 1000)
-      .isSame(`${year}-${monthFormatted}-01`, 'month')
+    return date.isSame(transaction.date * 1000, 'month')
   })
 }
 
-export function getWeek(transactions, week) {
+export function getWeek(transactions, date) {
   return transactions.filter(transaction => {
-    return moment(transaction.date * 1000).isoWeek() === week
+    return date.isSame(transaction.date * 1000, 'week')
   })
 }
 
-export function getDay(transactions, day) {
+export function getDay(transactions, date) {
   return transactions.filter(transaction => {
-    const yearMonth = moment(transaction.date * 1000).format('YYYY-MM')
-    const dayFormatted = day.toString().length === 1 ? `0${day}` : day
-
-    return moment(transaction.date * 1000)
-      .isSame(`${yearMonth}-${dayFormatted}`, 'day')
+    return date.isSame(transaction.date * 1000, 'day')
   })
 }

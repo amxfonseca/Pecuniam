@@ -11,26 +11,19 @@ import { getMonth, getYear } from '../helpers/transaction-helper'
 import { setDate } from '../actions/ui'
 
 function OverviewContainer({ transactions, ui, setDate }) {
-  const { year, month, day } = ui
-
-  const yearTransactions = getYear(transactions, year)
-  const monthTransactions = getMonth(yearTransactions, month)
-
   return (
     <div>
-      <YearView
-        transactions={yearTransactions}
-        year={year}
-      />
-      <MonthView
-        transactions={monthTransactions}
-        year={year}
-        month={month}
-      />
       <DateControl
         setDate={setDate}
-        year={year}
-        month={month}
+        date={ui.date}
+      />
+      <YearView
+        transactions={transactions}
+        date={ui.date}
+      />
+      <MonthView
+        transactions={transactions}
+        date={ui.date}
       />
     </div>
   )

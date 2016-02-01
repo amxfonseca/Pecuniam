@@ -7,25 +7,32 @@ import {
   getAllOutgoing,
   getAllIncoming,
   sumAmount,
+  getMonth,
   getDay
 } from '../helpers/transaction-helper'
 
-function MonthView({ transactions, year, month }) {
-  const daysInMonth = moment(`${year}-${month}`, 'YYYY-MM').daysInMonth();
+function MonthView({ transactions, date }) {
+  const daysInMonth = date.daysInMonth();
   const days = []
 
-  const incoming = getAllIncoming(transactions)
-  const outgoing = getAllOutgoing(transactions)
+  const filtered = getMonth(transactions, date)
+  const incoming = getAllIncoming(filtered)
+  const outgoing = getAllOutgoing(filtered)
 
   const dataIncoming = []
   const dataOutgoing = []
 
   for (let i = 0; i < daysInMonth; i++) {
-    const day = i + 1
-    dataIncoming.push(sumAmount(getDay(incoming, day)))
-    dataOutgoing.push(sumAmount(getDay(outgoing, day)))
+    const newDate = date.clone().date(i)
 
-    days.push(day)
+    dataIncoming.push(sumAmount(getDay(incoming, newDate)))
+    dataOutgoing.push(sumAmount(getDay(outgoing, newDate)))
+
+    if (date.date() === i) {
+      days.push(`>${newDate.format('DD')}<`)
+    } else {
+      days.push(newDate.format('DD'))
+    }
   }
 
   const datasets = [

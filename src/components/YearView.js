@@ -12,19 +12,27 @@ import {
   getMonth
 } from '../helpers/transaction-helper'
 
-function YearView({ transactions, year, month }) {
+function YearView({ transactions, date }) {
   const incoming = getAllIncoming(transactions)
   const outgoing = getAllOutgoing(transactions)
 
   const dataIncoming = months.map((month, index) => {
-    const monthIndex = index + 1
-    return sumAmount(getMonth(incoming, monthIndex))
+    const newDate = date.clone().month(index)
+    return sumAmount(getMonth(incoming, newDate))
   });
 
   const dataOutgoing = months.map((month, index) => {
-    const monthIndex = index + 1
-    return sumAmount(getMonth(outgoing, monthIndex))
+    const newDate = date.clone().month(index)
+    return sumAmount(getMonth(outgoing, newDate))
   });
+
+  const labels = months.map((month, index) => {
+    if (date.month() === index) {
+      return `>${date.format('MMMM')}<`
+    }
+    const newDate = date.clone().month(index)
+    return newDate.format('MMMM')
+  })
 
   const datasets = [
     { data: dataOutgoing },
@@ -33,7 +41,7 @@ function YearView({ transactions, year, month }) {
 
   return (
     <div>
-      <LineChart datasets={datasets} labels={months} />
+      <LineChart datasets={datasets} labels={labels} />
     </div>
   )
 }

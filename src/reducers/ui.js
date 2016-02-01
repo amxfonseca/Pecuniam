@@ -1,9 +1,7 @@
 import moment from 'moment'
 
 const initialState = {
-  year: moment().year(),
-  month: moment().month() + 1,
-  day: moment().day() + 1
+  date: moment()
 }
 
 export default function ui(state = initialState, action) {
@@ -11,8 +9,7 @@ export default function ui(state = initialState, action) {
     case Symbol.for('set-date'):
       return {
         ...state,
-        year: action.year,
-        month: action.month
+        date: action.date
       }
 
     default:
